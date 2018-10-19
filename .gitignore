@@ -1,4 +1,11 @@
+# macOS
 .DS_Store
+._*
+.Trashes
+.TemporaryItems
+Temporary Items
+
+# IntelliJ
 out/
 *class
 .idea/
@@ -6,3 +13,29 @@ out/
 .idea/misc.xml
 .idea/modules.xml
 .idea/vcs.xml
+
+# Eclipse JDT
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+*.launch
+.sonarlint/
+.project
+
+# Netbeans
+**/nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+nbactions.xml
+nb-configuration.xml
