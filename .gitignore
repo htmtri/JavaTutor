@@ -29,6 +29,7 @@ local.properties
 *.launch
 .sonarlint/
 .project
+.classpath
 
 # Netbeans
 **/nbproject/private/
