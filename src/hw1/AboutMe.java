@@ -8,7 +8,7 @@ public class AboutMe {
 	int age;
 	
 	//Constructor
-	AboutMe(String name,String school, int age){
+	public AboutMe(String name,String school, int age){
 		this.name = name;
 		this.school = school;
 		this.age = age;
