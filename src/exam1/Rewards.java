@@ -19,15 +19,15 @@ public class Rewards {
 	    String s = "";
 	   	if (points >= 50){
 	    	s += "1) free coffee - 50 pts\n";
-	    	if (points >= 100){
-	        	s += "2) free baked good - 100 pts\n";
-	        	if (points >= 200){
-	            	s += "3) free specialty coffee - 200 pts\n";
-	            	if (points >= 5000){
-	                	s+= "4) 1% store ownership - 5000 pts\n";
-	                }
-	            }
-	        }
+	   	}
+	   	if (points >= 100){
+	   	    s += "2) free baked good - 100 pts\n";
+	   	}
+	   	if (points >= 200){
+	   	    s += "3) free specialty coffee - 200 pts\n";
+	   	}
+	   	if (points >= 5000){
+	   	    s+= "4) 1% store ownership - 5000 pts\n";
 	   	}
 	   	return s;
 	  }
@@ -50,19 +50,19 @@ public class Rewards {
 		  else if (choice == 3) {
 	    	 if (points < 200){return "You do not have enough points for that reward.";}
 		     else {int a = points - 100;
-		           return "You have selected a free specialty coffee!. Points remaining :" + Integer.toString(a);} 
+		           return "You have selected a free specialty coffee!. Points remaining :" + Integer.toString(a);}
 		  }
 		  else if(choice == 4) {
 	    	 if (points < 5000){return "You do not have enough points for that reward.";}
 		     else {int a = points - 5000;
 		           return "You have selected a 1% store ownership. Points remaining :" + Integer.toString(a);}
-		      
+
 		  }
 		  else {
 	    	 return "Wrong choice";
 	    }
 	  }
-	
+
 	public static void main(String[] args) {
 		Scanner s = new Scanner(System.in);
 		System.out.println("Please enter amount of points:");
