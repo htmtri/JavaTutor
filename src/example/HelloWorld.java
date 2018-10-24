@@ -4,6 +4,28 @@ import java.lang.Math;
 public class HelloWorld {
     public static void main(String[] args) {
         System.out.println("Hello World");
+
+        /*String hello = "Hello";
+        for(int i = 0;i<=hello.length();i++) {
+                System.out.println(hello.substring(0,i));
+        }
+        for(int i = 1;i<=hello.length();i++){
+            System.out.println(hello.substring(i));
+        }*/
+
+        //double a = Double.MAX_VALUE;
+        //System.out.println(a);
+
+        /* int x = 3;
+        while (x > 2) {
+            x++;
+        } */
+
+        double x = 33;
+        while (x != 0) {
+            x += 2;
+        }
+        System.out.println(x);
         /*double x1 = Math.cos(Math.PI);
         System.out.println(x1);
         double x2 = 8/3;
@@ -21,6 +43,7 @@ public class HelloWorld {
         int a2 = Integer.MAX_VALUE;
         System.out.println(a2);
         */
+
     }
     
 }
