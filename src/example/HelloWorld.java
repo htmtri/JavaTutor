@@ -19,7 +19,6 @@ public class HelloWorld {
         float c = (float)a/(float)b;
         System.out.println(c);
         
-        
     }
     
 }
