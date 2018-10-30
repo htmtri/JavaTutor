@@ -1,4 +1,4 @@
-package msj1_p1;
+package msj1;
 import java.util.Scanner;
 import java.lang.Math;;
 

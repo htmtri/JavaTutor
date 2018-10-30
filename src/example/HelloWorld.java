@@ -6,7 +6,37 @@ public class HelloWorld {
     public static void main(String[] args) {
         System.out.println("Hello World");
         //xyBalancePractice();
-        System.out.println(repeatFront("xyz",3));
+        //System.out.println(repeatFront("xyz",3));
+
+        /*String a = "";
+        a += "0";
+        if (a == "0") {
+            System.out.println("a is 0!");
+        } else if (a == "1") {
+            System.out.println("a is 1!");
+        } else if (a == "a") {
+            System.out.println("a is a!");
+        } else {
+            System.out.println("a is something else!");
+        }
+*/
+
+        /*for (int k = 0;k < 3;k++) {
+            for (int i = 0; i < 10; i++) {
+                for (int j = 0; j < 3; j++) {
+                    System.out.print(i);
+                }
+            }
+            System.out.println();
+        }*/
+
+        /*for (int i = 1; i < 8; i++) {
+            for (int j = 0; j < i; j++) {
+                System.out.print(i);
+            }
+        System.out.println();
+        }*/
+
         /*String hello = "Hello";
         for(int i = 0;i<=hello.length();i++) {
                 System.out.println(hello.substring(0,i));
