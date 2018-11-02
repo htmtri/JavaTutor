@@ -7,6 +7,18 @@ public class HelloWorld {
         System.out.println("Hello World");
         //xyBalancePractice();
         //System.out.println(repeatFront("xyz",3));
+        //System.out.println("Count is  " + collatz(22));
+
+        
+
+        /*String s = "Science";
+        char a = s.charAt(3);
+        char b = s.charAt(6);
+        if (a.equals(b))
+            System.out.println("equals operator");
+        else
+            System.out.println("Goodbye!");
+        */
 
         /*String a = "";
         a += "0";
@@ -19,7 +31,7 @@ public class HelloWorld {
         } else {
             System.out.println("a is something else!");
         }
-*/
+        */
 
         /*for (int k = 0;k < 3;k++) {
             for (int i = 0; i < 10; i++) {
@@ -117,5 +129,17 @@ public class HelloWorld {
             ans += str.substring(0,i);
         }
         return ans;
+    }
+
+    public static int collatz(int n){
+        int c = 1;
+        while (n >1){
+            System.out.print(n + " ");
+            c++;
+            if (n%2 == 0){n/=2;}
+            else{n = 3*n+1;}
+        }
+        System.out.println(n);
+        return c;
     }
 }
