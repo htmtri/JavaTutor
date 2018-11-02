@@ -8,6 +8,7 @@ public class Prime {
         int n = s.nextInt();
         if (isPrime(n)){System.out.println("The number "+ n + " is a prime.");}
         else {System.out.println("The number " + n + " is not a prime.");}
+        s.close();
     }
     public static boolean isPrime(int n){
         if (n < 2){return false;}
@@ -16,4 +17,5 @@ public class Prime {
         }
         return true;
     }
+    
 }

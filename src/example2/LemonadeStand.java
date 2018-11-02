@@ -38,5 +38,6 @@ public class LemonadeStand {
         else {
             System.out.println("Thanks for your purchase. Have a nice day!");
         }
+        s.close();
     }
 }
