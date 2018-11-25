@@ -9,7 +9,7 @@ public class HelloWorld {
         //System.out.println(repeatFront("xyz",3));
         //System.out.println("Count is  " + collatz(22));
 
-        
+
         
         /*String s = "Science";
         char a = s.charAt(3);
