@@ -1,4 +1,6 @@
 package msj2;
+import sun.security.provider.certpath.OCSP;
+
 import java.util.Scanner;
 import java.util.Arrays;
 import java.util.Random;
@@ -11,10 +13,11 @@ public class BattleShipGame {
         g.initMaps();
         g.printMap();
         g.initPlayer();
-        g.printMap();
         g.initAI();
         g.printMap();
-        g.printMap(true);
+        //g.printMap(true);
+        System.out.println("Game Start!");
+        g.startGame();
 
     }
 
@@ -23,6 +26,9 @@ public class BattleShipGame {
     String[][] printedMap;
     String[][] OceanMap;
     private boolean cheat = false;
+    boolean gameover;
+    private int playerCount = 5;
+    private int AICount = 5;
 
     public void initMaps(){
         OceanMap = new String[10][10];
@@ -46,6 +52,8 @@ public class BattleShipGame {
                 }
                 else{
                     if (temp.equals("2")){printedMap[i][j] = " ";}
+                    else if (temp.equals(".")){printedMap[i][j] = " ";}
+                    else if (temp.equals("@")){printedMap[i][j] = "-";}
                     else{printedMap[i][j] = temp;}
                 }
             }
@@ -68,10 +76,10 @@ public class BattleShipGame {
         int ypos;
         for(int i = 0; i < 5; i++) {
             do {
-                xpos = r.nextInt(9);
-                ypos = r.nextInt(9);
+                xpos = r.nextInt(10);
+                ypos = r.nextInt(10);
             } while (!islegal(xpos, ypos));
-            updateOceanMap(xpos,ypos,2);
+            updateOceanMap(xpos,ypos,"2");
         }
     }
 
@@ -85,8 +93,8 @@ public class BattleShipGame {
         return false;
     }
 
-    void updateOceanMap(int x,int y,int t){
-        OceanMap[x][y] = String.valueOf(t);
+    void updateOceanMap(int x,int y,String t){
+        OceanMap[x][y] = t;
     }
 
     public void initPlayer(){
@@ -103,9 +111,114 @@ public class BattleShipGame {
                 legal = islegal(xpos,ypos);
                 if (!legal){System.out.println("Invalid position.");}
             } while (!legal);
-            updateOceanMap(xpos,ypos,1);
+            updateOceanMap(xpos,ypos,"1");
             count++;
             System.out.println("Remaining ship: " + (5-count));
         }
+    }
+
+    public void startGame(){
+        gameover = false;
+        while(!gameover) {
+            playerTurn();
+            printMap();
+            checkGameState();
+            if (gameover){return;}
+            AITurn();
+            //printMap(true);
+            checkGameState();
+        }
+    }
+
+    private void checkGameState(){
+        if (playerCount == 0){
+            gameover = true;
+            System.out.println("You lose!!!");
+        }
+        else if (AICount == 0){
+            gameover = true;
+            System.out.println("You win!!!");
+        }
+    }
+
+    void playerTurn(){
+        int xpos;
+        int ypos;
+        do {
+            System.out.println("Please enter x-coordinate of your shot:");
+            xpos = s.nextInt();
+            System.out.println("Please enter y-coordinate of your shot: ");
+            ypos = s.nextInt();
+        }while(!isallowed(xpos,ypos,1));
+        String shot = OceanMap[xpos][ypos];
+        if (shot.equals("2")){
+            updateOceanMap(xpos,ypos,"!");
+            AICount--;
+            System.out.println("You sunk the enemy ship.");
+        }
+        else if (shot.equals("1")){
+            updateOceanMap(xpos,ypos,"x");
+            playerCount--;
+            System.out.println("You sunk your own ship");
+        }
+        else if (shot.equals(" ")){
+            updateOceanMap(xpos,ypos,"-");
+            System.out.println("You missed");
+        }
+        else if (shot.equals(".")){
+            updateOceanMap(xpos,ypos,"@");
+            System.out.println("You missed");
+        }
+
+    }
+
+    void AITurn(){
+        int xpos;
+        int ypos;
+        do{
+            xpos = r.nextInt(10);
+            ypos = r.nextInt(10);
+        } while(!isallowed(xpos,ypos,2));
+        String shot = OceanMap[xpos][ypos];
+        if(shot.equals("1")){
+            updateOceanMap(xpos,ypos,"x");
+            playerCount--;
+            System.out.println("Computer hits one of our ship");
+            printMap();
+        }
+        else if (shot.equals("2")){
+            updateOceanMap(xpos,ypos,"!");
+            AICount--;
+            System.out.println("Computer hits its own ship");
+            printMap();
+        }
+        else if (shot.equals(" ")){
+            updateOceanMap(xpos,ypos,".");
+            System.out.println("Computer misses");
+        }
+        else if (shot.equals("-")){
+            updateOceanMap(xpos,ypos,"@");
+            System.out.println("Computer misses");
+        }
+    }
+
+    boolean isallowed(int x, int y,int t){
+        if (x < 0 || x > 9 || y < 0 || y > 9) {
+            if (t == 1){System.out.println("Out of bound.");}
+            return false;
+        }
+        String temp = OceanMap[x][y];
+        if (t == 1){
+            if (temp.equals("-")||temp.equals("@")||temp.equals("!")||temp.equals("x")){
+                System.out.println("This spot have already been hit.");
+                return false;
+            }
+        }
+        if (t == 2){
+            if (temp.equals(".")||temp.equals("@")||temp.equals("!")||temp.equals("x")){
+                return false;
+            }
+        }
+        return true;
     }
 }
