@@ -1,4 +1,4 @@
-package hw4;
+package hw1;
 import java.util.Scanner;
 
 public class LeapYear {

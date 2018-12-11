@@ -1,4 +1,4 @@
-package hw5;
+package hw1;
 import java.util.Scanner;
 
 public class Prime {

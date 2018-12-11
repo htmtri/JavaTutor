@@ -1,4 +1,4 @@
-package hw7;
+package hw2;
 
 import java.util.Random;
 
