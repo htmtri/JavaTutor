@@ -1,8 +1,11 @@
 package hw3;
 import java.util.Scanner;
+import java.io.File;
 public class HolidayRunner {
     public static void main(String[] args) {
-        DeliveryMap d = new DeliveryMap("maps/mapA.txt");
+        //File file = new File(".");
+        //for(String fileNames : file.list()) System.out.println(fileNames);
+        DeliveryMap d = new DeliveryMap("src/hw3/mapA.txt");
         ScannerClaus sc = new ScannerClaus(d);
         Scanner s = new Scanner(System.in);
         int playMode;
@@ -10,9 +13,13 @@ public class HolidayRunner {
         System.out.println("Automate (1) or Play (2): ");
         playMode = s.nextInt();
         if (playMode == 1) {
+            String moveset = sc.chooseMove(d);
+            System.out.println(moveset);
             do {
                 System.out.println(d.printMap());
-                sc.move(d, sc.chooseMove(d));
+                sc.move(d, moveset.charAt(0));
+                moveset = moveset.substring(1);
+                if(moveset.isEmpty()){moveset = sc.chooseMove(d);}
             } while (sc.getNumCarrots() > 0 && sc.getNumPresents() > 0);
         } else {
             do {
