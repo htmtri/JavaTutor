@@ -8,6 +8,7 @@ public class DeliveryMap {
     private int rows;
     private int cols;
     private int numPresents;
+    private int totalCarrot;
 
     public DeliveryMap(String fileName) {
         Scanner s;
@@ -16,6 +17,7 @@ public class DeliveryMap {
             this.rows = s.nextInt();
             this.cols = s.nextInt();
             this.numPresents = s.nextInt();
+            this.totalCarrot = s.nextInt();
             map = new char[rows][cols];
             String mapInput = s.nextLine();
             for (int r = 0; r < rows; r++) {
@@ -35,6 +37,10 @@ public class DeliveryMap {
 
     public char getPosition(int r, int c) {
         return map[r][c];
+    }
+
+    public int getTotalCarrot(){
+        return totalCarrot;
     }
 
     public boolean setPosition(int r, int c, boolean previous) {
@@ -59,6 +65,21 @@ public class DeliveryMap {
             }
         }
         return pos; }
+
+    public int[][] findAll(char toFind){
+        int[][] ans = new int[totalCarrot][2];
+        int i = 0;
+        for (int r = 0; r < this.rows; r++) {
+            for (int c = 0; c < this.cols; c++) {
+                if (map[r][c] == toFind) {
+                    ans[i][0] = r;
+                    ans[i][1] = c;
+                    i++;
+                }
+            }
+        }
+        return ans;
+    }
 
     public String printMap() {
         String out = "";

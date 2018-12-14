@@ -47,6 +47,7 @@ public class ScannerClaus {
         String moveset = "";
         double[] dist = new double[9];
         int[] movep;
+        int[] maxp;
 
         while (count < 9){
             int[] temp = d.find((char)(count+1+'0'));
@@ -55,14 +56,51 @@ public class ScannerClaus {
             count++;
         }
         for (int i = 0; i < 9;i++){
+            if (listp[i][0] == 99 || listp[i][1] == 99){dist[i] = 0;}
+            else{dist[i] = Math.sqrt(Math.pow((listp[i][0] - startp[0]),2)+Math.pow((listp[i][1] - startp[1]),2));}
+        }
+
+        int mindex = findMinIndex(dist);
+        int maxdex = findMaxIndex(dist);
+        movep = listp[mindex];
+        maxp = listp[maxdex];
+        int maxdistance = Math.abs(maxp[0]-startp[0])+Math.abs(maxp[1]-startp[1]);
+
+        if (this.numCarrots < maxdistance){
+            moveset = choseCarrot(d);
+        }
+        else {
+            moveset = findMoveSet(startp,movep);
+        }
+        return moveset;
+    }
+
+    public String choseCarrot(DeliveryMap d){
+        int[] startp = d.find('S');
+        int[][] listp;
+        String moveset;
+        double[] dist = new double[d.getTotalCarrot()];
+        int[] movep;
+
+
+        listp = d.findAll('C');
+
+        for (int i = 0; i < dist.length;i++){
+            if (listp[i][0] == 99 || listp[i][1] == 99){dist[i] = 0;}
             dist[i] = Math.sqrt(Math.pow((listp[i][0] - startp[0]),2)+Math.pow((listp[i][1] - startp[1]),2));
         }
 
         int mindex = findMinIndex(dist);
         movep = listp[mindex];
+        moveset = findMoveSet(startp,movep);
+        return moveset;
+    }
+
+    public String findMoveSet(int[] startp, int[] movep){
+        String moveset = "";
         int ver = movep[0]-startp[0];
         int hor = movep[1]-startp[1];
-        if(hor > 0) {
+        if (hor > 0) {
             for (int i = 0; i < hor; i++) {
                 moveset += "D";
             }
@@ -72,30 +110,62 @@ public class ScannerClaus {
                 moveset += "A";
             }
         }
-        if (ver >0) {
+        if (ver > 0) {
             for (int i = 0; i < ver; i++) {
                 moveset += "S";
             }
         }
-        if (ver <0) {
+        if (ver < 0) {
             for (int i = 0; i > ver; i--) {
                 moveset += "W";
             }
         }
-
         return moveset;
     }
 
     public int findMinIndex(double[] list){
-        double mval = list[0];
+        double minval = 99;
         int ans = 0;
         for (int i = 0; i < list.length; i++){
-            if (list[i]< mval){
-                mval = list[i];
+            if (list[i] != 0 && list[i] < minval){
+                minval = list[i];
                 ans = i;
             }
         }
         return ans;
+    }
+
+    public int findMaxIndex(double[] list){
+        double maxval = list[0];
+        int ans = 0;
+        for (int i = 0; i < list.length; i++){
+            if (list[i]> maxval){
+                maxval = list[i];
+                ans = i;
+            }
+        }
+        return ans;
+    }
+
+    public boolean isValid(DeliveryMap d, char move){
+        int[] startp = d.find('S');
+        if(move == 'W'){
+            if (d.getPosition(startp[0]-1,startp[1]) == 'X'){return false;}
+            else return true;
+        }
+        else if (move == 'A'){
+            if (d.getPosition(startp[0],startp[1]-1) == 'X'){return false;}
+            else return true;
+        }
+        else if (move == 'S'){
+            if (d.getPosition(startp[0]+1,startp[1]) == 'X'){return false;}
+            else return true;
+        }
+        else if (move == 'D'){
+            if (d.getPosition(startp[0],startp[1]+1) == 'X'){return false;}
+            else return true;
+        }
+        return false;
     }
 
     public void move(DeliveryMap d, char dir) {

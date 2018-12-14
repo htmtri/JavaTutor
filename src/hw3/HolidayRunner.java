@@ -19,7 +19,13 @@ public class HolidayRunner {
                 System.out.println(d.printMap());
                 sc.move(d, moveset.charAt(0));
                 moveset = moveset.substring(1);
-                if(moveset.isEmpty()){moveset = sc.chooseMove(d);}
+                while (!moveset.isEmpty()&&!sc.isValid(d,moveset.charAt(0))){
+                    moveset = moveset.substring(1);
+                }
+                if (moveset.isEmpty()){
+                    moveset = sc.chooseMove(d);
+
+                }
             } while (sc.getNumCarrots() > 0 && sc.getNumPresents() > 0);
         } else {
             do {
