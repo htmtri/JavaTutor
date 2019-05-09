@@ -41,3 +41,5 @@ nbdist/
 nbactions.xml
 nb-configuration.xml
 *.iml
+.vscode/launch.json
+.vscode/settings.json
