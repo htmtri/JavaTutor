@@ -1,5 +1,5 @@
 package msj2;
-import sun.security.provider.certpath.OCSP;
+//import sun.security.provider.certpath.OCSP;
 
 import java.util.Scanner;
 import java.util.Arrays;
